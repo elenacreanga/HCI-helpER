@@ -8,3 +8,28 @@ for (i = 0; i < acc.length; i++) {
         this.nextElementSibling.classList.toggle("show");
     }
 }
+
+var activateAccordion = function () {
+    $("#accordion").accordion({
+        collapsible: true
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    var link = document.getElementById('accordion');
+    link.addEventListener('mouseover', function () {
+        activateAccordion();
+    });
+});
+
+//chrome.browserAction.onClicked.addListener(function (tab) {
+//    activateAccordion();
+//});
+
+//chrome.webNavigation.onCompleted.addListener(function(details) {
+//    chrome.tabs.executeScript(details.tabId, {
+//        code: ' $("#accordion").accordion({' +
+//              '     collapsible: true' +
+//              ' });'
+//    });
+//});

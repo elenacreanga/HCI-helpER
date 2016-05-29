@@ -4,8 +4,11 @@
   "name": "Colour Me Right",
   "description": "Bringing justice to colour blind people",
   "version": "1.0",
-  "browser_action": {
-    "default_icon": "img/Logo.png",
-    "default_popup": "popup.html"
-  }
+    "browser_action": {
+        "default_icon": "css/images/Logo.png",
+        "default_popup": "popup.html"
+    },
+    /*"background": {
+        "scripts": ["work.js"]
+      }*/
 }
