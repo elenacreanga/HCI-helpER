@@ -1,25 +1,54 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        min-width: 357px;
-        overflow-x: hidden;
-      }
+      <title>Getting Started Extension's Popup</title>
+      <link rel="stylesheet" href="css/jquery.ui.all.css">
+      <script src="scripts/jquery-1.10.2.js"></script>
+      <script src="scripts/jquery.ui.core.js"></script>
+      <script src="scripts/jquery.ui.widget.js"></script>
+      <script src="scripts/jquery.ui.accordion.js"></script>
+      <style>
+          body {
+              min-width: 357px;
+              overflow-x: hidden;
+          }
 
-      img {
-        margin: 5px;
-        border: 2px solid black;
-        vertical-align: middle;
-        width: 75px;
-        height: 75px;
-      }
-    </style>
-    <script src="popup.js"></script>
+          img {
+              margin: 5px;
+              border: 2px solid black;
+              vertical-align: middle;
+              width: 75px;
+              height: 75px;
+          }
+      </style>
+      <script src="popup.js"></script>
+      <script>
+          $(function () {
+              $("#accordion").accordion({
+                  collapsible: true
+              });
+          });
+      </script>
   </head>
-  <body>
-      Testing the popup
-  </body>
+<body>
+    <div id="accordion">
+        <h3>Reader View</h3>
+        <div>
+            <p>this is the reader view section</p>
+        </div>
+        <h3>Color Config</h3>
+        <div>
+            <p>Color config section</p>
+        </div>
+        <h3>Night mode</h3>
+        <div>
+            <p>Flux-like</p>
+        </div>
+        <h3>Leap motion</h3>
+        <div>
+            <p>Leap motion section</p>
+        </div>
+    </div>
+</body>
 </html>
 
