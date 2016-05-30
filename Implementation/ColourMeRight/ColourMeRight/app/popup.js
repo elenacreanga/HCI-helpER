@@ -27,18 +27,73 @@ var executeScript = function () {
 }
 
 //change page colour
+var colours = [
+    {
+        colour: "darkGrey",
+        hex: "#151515"
+    },
+    {
+        colour: "purple",
+        hex: "#886677"
+    },
+    {
+        colour: "beige",
+        hex: "#f5f1de"
+    },
+    {
+        colour: "black",
+        hex: "#000000"
+    }
+];
+
 function click(e) {
+    var filteredColours = colours.filter(function(x) {
+        return x.colour === e.target.id;
+    });
     chrome.tabs.executeScript(null,
-        { code: "document.body.style.backgroundColor='" + e.target.id + "'" });
+        { code: "document.body.style.backgroundColor='" + filteredColours[0].hex + "'" });
     window.close();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var divs = document.querySelectorAll('.pageColour');
+    var divs = document.querySelectorAll('.backgroundColour');
     for (var i = 0; i < divs.length; i++) {
         divs[i].addEventListener('click', click);
     }
 });
+
+////change text colour
+//var colours2 = [
+//    {
+//        colour: "white",
+//        hex: "#ffffff"
+//    },
+//    {
+//        colour: "red",
+//        hex: "#886677"
+//    },
+//    {
+//        colour: "blue",
+//        hex: "#f5f1de"
+//    }
+//];
+
+//function click2(e) {
+//    var filteredColours = colours2.filter(function (x) {
+//        return x.colour === e.target.id;
+//    });
+//    chrome.tabs.executeScript(null,
+//        { code: "document.body.style.text='" + filteredColours[0].hex + "'" });
+//    window.close();
+//}
+
+//document.addEventListener('DOMContentLoaded', function () {
+//    var divs = document.querySelectorAll('.textColour');
+//    for (var i = 0; i < divs.length; i++) {
+//        divs[i].addEventListener('click', click2);
+//    }
+//});
+
 
 //Leap Motion
 var minions = {};
