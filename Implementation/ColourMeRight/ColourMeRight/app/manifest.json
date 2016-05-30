@@ -2,8 +2,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Test Colour Me Right",
-  "description": "Test",
+  "name": "Colour Me Right",
+  "description": "Bringing justice to colour blind people",
   "version": "1.0",
     "browser_action": {
         "default_icon": "css/images/Logo.png",

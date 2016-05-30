@@ -1,3 +1,4 @@
+//activate accordion
 document.addEventListener('DOMContentLoaded', function () {
     var link = document.getElementById('accordion');
     link.addEventListener('mouseover', function () {
@@ -5,7 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+var activateAccordion = function () {
+    $("#accordion").accordion({
+        collapsible: true
+    });
+}
 
+//apply colour filter
 document.addEventListener('DOMContentLoaded', function () {
     var link = document.getElementById('button');
     link.addEventListener('click', function () {
@@ -19,19 +26,21 @@ var executeScript = function () {
     });
 }
 
-var activateAccordion = function () {
-    $("#accordion").accordion({
-        collapsible: true
-    });
+//change page colour
+function click(e) {
+    chrome.tabs.executeScript(null,
+        { code: "document.body.style.backgroundColor='" + e.target.id + "'" });
+    window.close();
 }
-//chrome.webNavigation.onCompleted.addListener(function(details) {
-//    chrome.tabs.executeScript(details.tabId, {
-//        code: ' $("#accordion").accordion({' +
-//              '     collapsible: true' +
-//              ' });'
-//    });
-//});
 
+document.addEventListener('DOMContentLoaded', function () {
+    var divs = document.querySelectorAll('.pageColour');
+    for (var i = 0; i < divs.length; i++) {
+        divs[i].addEventListener('click', click);
+    }
+});
+
+//Leap Motion
 var minions = {};
 
 Leap.loop(function (frame) {
