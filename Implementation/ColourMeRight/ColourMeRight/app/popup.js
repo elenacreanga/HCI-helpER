@@ -43,17 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
 //Leap Motion
 var minions = {};
 
-Leap.loop(function (frame) {
+//Leap.loop(function (frame) {
 
-    frame.hands.forEach(function (hand, index) {
+//    frame.hands.forEach(function (hand, index) {
 
-        var minion = (minions[index] || (minions[index] = new Minion()));
-        minion.setTransform(hand.screenPosition(), hand.roll());
-        minion.setVisibility("visible");
-    });
+//        var minion = (minions[index] || (minions[index] = new Minion()));
+//        minion.setTransform(hand.screenPosition(), hand.roll());
+//        minion.setVisibility("visible");
+//    });
     
 
-}).use('screenPosition', { scale: 0.25 });
+//}).use('screenPosition', { scale: 0.25 });
 
 
 var Minion = function () {
@@ -88,4 +88,29 @@ minions[0] = new Minion();
 minions[0].setVisibility("hidden");
 
 // This allows us to move the minion even whilst in an iFrame.
-Leap.loopController.setBackground(true);
+//Leap.loopController.setBackground(true);
+
+
+
+var controller = new Leap.Controller({ enableGestures: true });
+
+controller.addStep(function (frame) {
+    for (var g = 0; g < frame.gestures.length; g++) {
+        var gesture = frame.gestures[g];
+        controller.emit(gesture.type, gesture, frame);
+    }
+    return frame; // Return frame data unmodified
+});
+
+// Circle gesture event listener
+controller.on('circle', function (circle, frame) {
+    executeScript();
+    // Print its data when the state is start or stop
+    if (circle.state == 'start' || circle.state == 'stop') {
+        console.log(circle.state, circle.type, circle.id,
+                    'radius:', circle.radius);
+    }
+});
+
+// Start listening for frames
+controller.connect();
