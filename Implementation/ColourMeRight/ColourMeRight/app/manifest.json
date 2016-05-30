@@ -7,8 +7,5 @@
     "browser_action": {
         "default_icon": "css/images/Logo.png",
         "default_popup": "popup.html"
-    },
-    /*"background": {
-        "scripts": ["work.js"]
-      }*/
+    }
 }

@@ -74,11 +74,17 @@
     <Content Include="app\css\jquery.ui.tooltip.css" />
     <Content Include="app\popup.html" />
     <Content Include="app\popup.js" />
+    <Content Include="app\scripts\background.js" />
+    <Content Include="app\scripts\dalton.js" />
     <Content Include="app\scripts\jquery-1.10.2.js" />
     <Content Include="app\scripts\jquery-ui.js" />
     <Content Include="app\scripts\jquery.ui.accordion.js" />
     <Content Include="app\scripts\jquery.ui.core.js" />
     <Content Include="app\scripts\jquery.ui.widget.js" />
+    <Content Include="app\scripts\leap-0.6.4.js" />
+    <Content Include="app\scripts\leap-plugins-0.1.11.js" />
+    <Content Include="app\scripts\options.js" />
+    <Content Include="app\scripts\popup.js" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />
     <Content Include="Properties\build\lib\MSBuild.ExtensionPack.dll" />
     <Content Include="screenshots\screenshot.png" />
