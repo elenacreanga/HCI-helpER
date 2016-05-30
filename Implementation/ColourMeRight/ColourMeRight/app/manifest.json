@@ -1,14 +1,21 @@
+
 {
   "manifest_version": 2,
 
-  "name": "Colour Me Right",
-  "description": "Bringing justice to colour blind people",
+  "name": "Test Colour Me Right",
+  "description": "Test",
   "version": "1.0",
-    "browser_action": {
-        "default_icon": "css/images/Logo.png",
-        "default_popup": "popup.html"
-    },
-    /*"background": {
-        "scripts": ["work.js"]
-      }*/
+  "browser_action": {
+     "default_icon": "css/images/Logo.png",
+     "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab", "tabs", "http://*/*", "https://*/*", "*://*/*"
+    ],
+  "content_scripts": [
+    {
+      "js": [ "popup.js" ],
+      "matches": [ "http://*/*", "https://*/*", "*://*/*" ]
+    }
+  ]
 }

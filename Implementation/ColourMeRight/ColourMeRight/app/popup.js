@@ -7,13 +7,7 @@ for (i = 0; i < acc.length; i++) {
         this.classList.toggle("active");
         this.nextElementSibling.classList.toggle("show");
     }
-}
-
-var activateAccordion = function () {
-    $("#accordion").accordion({
-        collapsible: true
-    });
-}
+}   
 
 document.addEventListener('DOMContentLoaded', function () {
     var link = document.getElementById('accordion');
@@ -22,14 +16,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-//chrome.browserAction.onClicked.addListener(function (tab) {
-//    activateAccordion();
-//});
 
-//chrome.webNavigation.onCompleted.addListener(function(details) {
-//    chrome.tabs.executeScript(details.tabId, {
-//        code: ' $("#accordion").accordion({' +
-//              '     collapsible: true' +
-//              ' });'
-//    });
-//});
+document.addEventListener('DOMContentLoaded', function () {
+    var link = document.getElementById('button');
+    link.addEventListener('click', function () {
+        executeScript();
+    });
+});
+
+var executeScript = function () {
+    chrome.tabs.executeScript({
+        file: 'colourFilter.js'
+    });
+}
+var activateAccordion = function () {
+    $("#accordion").accordion({
+        collapsible: true
+    });
+}

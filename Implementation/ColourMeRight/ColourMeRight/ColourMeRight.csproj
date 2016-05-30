@@ -79,9 +79,9 @@
     <Content Include="app\scripts\jquery.ui.accordion.js" />
     <Content Include="app\scripts\jquery.ui.core.js" />
     <Content Include="app\scripts\jquery.ui.widget.js" />
+    <Content Include="app\work.js" />
     <Content Include="Properties\build\lib\Ionic.Zip.DLL" />
     <Content Include="Properties\build\lib\MSBuild.ExtensionPack.dll" />
-    <Content Include="screenshots\screenshot.png" />
     <Content Include="index.htm" />
     <Content Include="Properties\build\ligershark.chrome.targets" />
     <Content Include="screenshots\readme.txt" />
