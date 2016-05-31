@@ -1,0 +1,58 @@
+﻿body {
+    min-width: 357px;
+    overflow-x: hidden;
+}
+
+img {
+    margin: 5px;
+    border: 2px solid black;
+    vertical-align: middle;
+    width: 75px;
+    height: 75px;
+}
+
+#theme1 {
+    background: #121212;
+}
+
+#theme2 {
+    background: #525252;
+}
+
+#theme3 {
+    background: #F9F1E4;
+}
+
+#theme4 {
+    background: #FBFBFB;
+}
+
+.theme {
+    width:30px;
+    height:30px;
+    border-radius:50px;
+    font-size:20px;
+    color:#fff;
+    line-height:30px;
+    text-align:center;
+    border: 1px black;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.container {
+    width: 300px;
+}
+
+.container div {
+    float: left;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.container span {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+}
