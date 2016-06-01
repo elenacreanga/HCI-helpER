@@ -13,6 +13,9 @@ var activateAccordion = function () {
     });
 }
 
+var filters = ["none", "protanopia", "protanomaly", "deuteranopia", "deuteranomaly", "tritanopia", "tritanomaly", "achromatopsia", "achromatomaly"];
+var currentFilterId = 0;
+
 //apply colour filter
 document.addEventListener('DOMContentLoaded', function () {
     var protanopia = document.getElementById('protanopia');
@@ -50,7 +53,18 @@ function sendColorRequest(e) {
     } else {
         value = undefined;
     }
+    for (var i in filters) {
+        if (filters.hasOwnProperty(i)) {
+            if (filters[i] == value) {
+                currentFilterId = i;
+                break;
+            }
+        }
+    }
+    sendFilterRequest(value);
+}
 
+function sendFilterRequest(value) {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { value: value }, null);
     });
@@ -159,6 +173,25 @@ var controller = new Leap.Controller({ enableGestures: true });
 //    }
 //});
 
+function isDirectionClockwise(circle, frame) {
+    var clockwise = false;
+    var pointableID = circle.pointableIds[0];
+    var direction = frame.pointable(pointableID).direction;
+    var dotProduct = Leap.vec3.dot(direction, circle.normal);
+
+    if (dotProduct > 0) clockwise = true;
+    return clockwise;
+
+}
+
+function updateCurrentFilterId(circle, frame) {
+    if (isDirectionClockwise(circle, frame)) {
+        currentFilterId = (currentFilterId + 1) % 9;
+    } else {
+        currentFilterId = (currentFilterId - 1) % 9;
+    }
+}
+
 function findPinchingFingerType(hand) {
     var pincher;
     var closest = 500;
@@ -183,21 +216,32 @@ controller.addStep(function (frame) {
     return frame; // Return frame data unmodified
 });
 
-controller.addStep(function(hand) {
-    if (hand.pinchStrength > 0) {
-        var pinchingFinger = findPinchingFingerType(hand);
-        console.log("the finger is " + pinchingFinger.type + "<br />");
-    }
-});
+//controller.addStep(function(hand) {
+//    if (hand.pinchStrength > 0 ) {
+//        var pinchingFinger = findPinchingFingerType(hand);
+//        console.log("the finger is " + pinchingFinger.type + "<br />");
+//    }
+//});
 
 // Circle gesture event listener
 controller.on('circle', function (circle, frame) {
-    executeScript();
     // Print its data when the state is start or stop
-    if (circle.state == 'start' || circle.state == 'stop') {
+    if (circle.state == 'stop') {
         console.log(circle.state, circle.type, circle.id,
-                    'radius:', circle.radius);
+            'radius:', circle.radius);
+
+        updateCurrentFilterId(circle, frame);
+        sendFilterRequest(filters[currentFilterId]);
     }
+});
+
+controller.on('frame', function (frame) {
+    frame.hands.forEach(function (hand) {
+        if (hand.pinchStrength == 1 && hand.grabStrength !== 1) {
+            var pinchingFinger = findPinchingFingerType(hand);
+            console.log("the finger is " + pinchingFinger.type + "<br />");
+        }
+    });
 });
 
 // Start listening for frames
