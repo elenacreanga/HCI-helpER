@@ -8,21 +8,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var activateAccordion = function () {
     $("#accordion").accordion({
-        collapsible: true
+        collapsible: true,
+        heightStyle: 'content'
     });
 }
 
 //apply colour filter
 document.addEventListener('DOMContentLoaded', function () {
-    var link = document.getElementById('button');
-    link.addEventListener('click', function () {
-        executeScript();
-    });
+    var protanopia = document.getElementById('protanopia');
+    protanopia.addEventListener('click', sendColorRequest);
+
+    var protanomaly = document.getElementById('protanomaly');
+    protanomaly.addEventListener('click', sendColorRequest);
+
+    var deuteranopia = document.getElementById('deuteranopia');
+    deuteranopia.addEventListener('click', sendColorRequest);
+
+    var deuteranomaly = document.getElementById('deuteranomaly');
+    deuteranomaly.addEventListener('click', sendColorRequest);
+
+    var tritanopia = document.getElementById('tritanopia');
+    tritanopia.addEventListener('click', sendColorRequest);
+
+    var tritanomaly = document.getElementById('tritanomaly');
+    tritanomaly.addEventListener('click', sendColorRequest);
+
+    var achromatopsia = document.getElementById('achromatopsia');
+    achromatopsia.addEventListener('click', sendColorRequest);
+
+    var achromatomaly = document.getElementById('achromatomaly');
+    achromatomaly.addEventListener('click', sendColorRequest);
+
+    var none = document.getElementById('none');
+    none.addEventListener('click', sendColorRequest);
 });
 
-var executeScript = function () {
-    chrome.tabs.executeScript({
-        file: 'colourFilter.js'
+function sendColorRequest(e) {
+    var value;
+    if (e.target.id !== "none") {
+        value = e.target.id;
+    } else {
+        value = undefined;
+    }
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { value: value }, null);
     });
 }
 
@@ -56,7 +86,6 @@ function changeTheme(e) {
     });
     chrome.tabs.executeScript(null,
         { code: "document.body.style.backgroundColor='" + filteredThemes[0].backgroundColour + "'; document.body.style.color='" + +filteredThemes[0].textColour + "'"});
-    window.close();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
