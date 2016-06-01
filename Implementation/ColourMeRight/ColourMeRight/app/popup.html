@@ -3,27 +3,14 @@
   <head>
       <title>Getting Started Extension's Popup</title>
       <link rel="stylesheet" href="css/jquery.ui.all.css">
+      <link href="css/styles.css" rel="stylesheet" />
       <script src="scripts/jquery-1.10.2.js"></script>
       <script src="scripts/jquery.ui.core.js"></script>
       <script src="scripts/jquery.ui.widget.js"></script>
       <script src="scripts/jquery.ui.accordion.js"></script>
-
+      
       <script src="scripts/leap-0.6.4.js"></script>
       <script src="scripts/leap-plugins-0.1.11.js"></script>
-      <style>
-          body {
-              min-width: 357px;
-              overflow-x: hidden;
-          }
-
-          img {
-              margin: 5px;
-              border: 2px solid black;
-              vertical-align: middle;
-              width: 75px;
-              height: 75px;
-          }
-      </style>
       <script src="popup.js"></script>
   </head>
 <body>
@@ -31,20 +18,31 @@
         <h3>Reader View</h3>
         <div>
             <p>
-                Choose background color: <br/>
-                <div id="beige" class="backgroundColour">beige</div>
-                <div id="purple" class="backgroundColour">purple</div>
-                <div id="darkGrey" class="backgroundColour">dark grey</div>
-                <div id="black" class="backgroundColour">black</div>
-                <!--Choose text color: <br />
-                <div id="white" class="textColour">white</div>
-                <div id="red" class="textColour">red</div>
-                <div id="blue" class="textColour">blues</div>-->
+                <div class="container">
+                    <span>Choose theme: <br /></span>
+                    <div id="theme1" class="theme"></div>
+                    <div id="theme2" class="theme"></div>
+                    <div id="theme3" class="theme"></div>
+                    <div id="theme4" class="theme"></div>
+                </div>
             </p>
         </div>
         <h3>Color Config</h3>
         <div>
-            <p><a id="button">Choose colour blindness condition</a></p>
+            <p>
+                <span>Choose colour blindness condition</span>
+                <ul>
+                    <li id="none" class="colourBlindnessCondition">None</li>
+                    <li id="protanopia" class="colourBlindnessCondition">Protanopia</li>
+                    <li id="protanomaly" class="colourBlindnessCondition">Protanomaly</li>
+                    <li id="deuteranopia" class="colourBlindnessCondition">Deuteranopia</li>
+                    <li id="deuteranomaly" class="colourBlindnessCondition">Deuteranomaly</li>
+                    <li id="tritanopia" class="colourBlindnessCondition">Tritanopia</li>
+                    <li id="tritanomaly" class="colourBlindnessCondition">Tritanomaly</li>
+                    <li id="achromatopsia" class="colourBlindnessCondition">Achromatopsia</li>
+                    <li id="achromatomaly" class="colourBlindnessCondition">Achromatomaly</li>
+                </ul>
+            </p>
         </div>
         <h3>Night mode</h3>
         <div>

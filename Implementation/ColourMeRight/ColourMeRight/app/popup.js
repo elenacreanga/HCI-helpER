@@ -8,92 +8,92 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var activateAccordion = function () {
     $("#accordion").accordion({
-        collapsible: true
+        collapsible: true,
+        heightStyle: 'content'
     });
 }
 
 //apply colour filter
 document.addEventListener('DOMContentLoaded', function () {
-    var link = document.getElementById('button');
-    link.addEventListener('click', function () {
-        executeScript();
-    });
+    var protanopia = document.getElementById('protanopia');
+    protanopia.addEventListener('click', sendColorRequest);
+
+    var protanomaly = document.getElementById('protanomaly');
+    protanomaly.addEventListener('click', sendColorRequest);
+
+    var deuteranopia = document.getElementById('deuteranopia');
+    deuteranopia.addEventListener('click', sendColorRequest);
+
+    var deuteranomaly = document.getElementById('deuteranomaly');
+    deuteranomaly.addEventListener('click', sendColorRequest);
+
+    var tritanopia = document.getElementById('tritanopia');
+    tritanopia.addEventListener('click', sendColorRequest);
+
+    var tritanomaly = document.getElementById('tritanomaly');
+    tritanomaly.addEventListener('click', sendColorRequest);
+
+    var achromatopsia = document.getElementById('achromatopsia');
+    achromatopsia.addEventListener('click', sendColorRequest);
+
+    var achromatomaly = document.getElementById('achromatomaly');
+    achromatomaly.addEventListener('click', sendColorRequest);
+
+    var none = document.getElementById('none');
+    none.addEventListener('click', sendColorRequest);
 });
 
-var executeScript = function () {
-    chrome.tabs.executeScript({
-        file: 'colourFilter.js'
+function sendColorRequest(e) {
+    var value;
+    if (e.target.id !== "none") {
+        value = e.target.id;
+    } else {
+        value = undefined;
+    }
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { value: value }, null);
     });
 }
 
-//change page colour
-var colours = [
+//change theme
+var themes = [
     {
-        colour: "darkGrey",
-        hex: "#151515"
+        name: "theme1",  
+        backgroundColour: "#121212",
+        textColour: "#B2B2B2"
     },
     {
-        colour: "purple",
-        hex: "#886677"
+        name: "theme2",
+        backgroundColour: "#525252",
+        textColour: "#FEFEFE"
     },
     {
-        colour: "beige",
-        hex: "#f5f1de"
+        name: "theme3",
+        backgroundColour: "#F9F1E4",
+        textColour: "#542D1E"
     },
     {
-        colour: "black",
-        hex: "#000000"
+        name: "theme4",
+        backgroundColour: "#FBFBFB",
+        textColour: "#111111"
     }
 ];
 
-function click(e) {
-    var filteredColours = colours.filter(function(x) {
-        return x.colour === e.target.id;
+function changeTheme(e) {
+    var filteredThemes = themes.filter(function (x) {
+        return x.name === e.target.id;
     });
     chrome.tabs.executeScript(null,
-        { code: "document.body.style.backgroundColor='" + filteredColours[0].hex + "'" });
-    window.close();
+        { code: "document.body.style.backgroundColor='" + filteredThemes[0].backgroundColour + "'; document.body.style.color='" + +filteredThemes[0].textColour + "'"});
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var divs = document.querySelectorAll('.backgroundColour');
+    var divs = document.querySelectorAll('.theme');
     for (var i = 0; i < divs.length; i++) {
-        divs[i].addEventListener('click', click);
+        divs[i].addEventListener('click', changeTheme);
     }
 });
-
-////change text colour
-//var colours2 = [
-//    {
-//        colour: "white",
-//        hex: "#ffffff"
-//    },
-//    {
-//        colour: "red",
-//        hex: "#886677"
-//    },
-//    {
-//        colour: "blue",
-//        hex: "#f5f1de"
-//    }
-//];
-
-//function click2(e) {
-//    var filteredColours = colours2.filter(function (x) {
-//        return x.colour === e.target.id;
-//    });
-//    chrome.tabs.executeScript(null,
-//        { code: "document.body.style.text='" + filteredColours[0].hex + "'" });
-//    window.close();
-//}
-
-//document.addEventListener('DOMContentLoaded', function () {
-//    var divs = document.querySelectorAll('.textColour');
-//    for (var i = 0; i < divs.length; i++) {
-//        divs[i].addEventListener('click', click2);
-//    }
-//});
-
 
 //Leap Motion
 var minions = {};
