@@ -149,12 +149,45 @@ minions[0].setVisibility("hidden");
 
 var controller = new Leap.Controller({ enableGestures: true });
 
+//controller.loop({
+//    hand: function (hand) {
+//        if (hand.pinchStrength > 0) {
+//            var pinchingFinger = findPinchingFingerType(hand);
+//            console.log("the finger is " + pinchingFinger.type + "<br />");
+//        }
+
+//    }
+//});
+
+function findPinchingFingerType(hand) {
+    var pincher;
+    var closest = 500;
+    for (var f = 1; f < 5; f++) {
+        current = hand.fingers[f];
+        var fingerIds = [hand.thumb, hand.indexFinger, hand.middleFinger, hand.ringFinger, hand.pinky];
+
+        distance = Leap.vec3.distance(hand.thumb.tipPosition, current.tipPosition);
+        if (current != hand.thumb && distance < closest) {
+            closest = distance;
+            pincher = current;
+        }
+    }
+    return pincher;
+}
+
 controller.addStep(function (frame) {
     for (var g = 0; g < frame.gestures.length; g++) {
         var gesture = frame.gestures[g];
         controller.emit(gesture.type, gesture, frame);
     }
     return frame; // Return frame data unmodified
+});
+
+controller.addStep(function(hand) {
+    if (hand.pinchStrength > 0) {
+        var pinchingFinger = findPinchingFingerType(hand);
+        console.log("the finger is " + pinchingFinger.type + "<br />");
+    }
 });
 
 // Circle gesture event listener
