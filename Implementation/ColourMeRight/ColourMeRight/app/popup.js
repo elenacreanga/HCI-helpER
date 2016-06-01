@@ -229,7 +229,6 @@ controller.on('swipe', function (swipe, frame) {
                     'direction:', dir);
         updateCurrentThemeId(swipe);
         applyTheme();
-
     }
 });
 

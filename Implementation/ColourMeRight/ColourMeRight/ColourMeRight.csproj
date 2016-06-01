@@ -40,7 +40,9 @@
   <ItemGroup>
     <Content Include="app\colourFilter.js" />
     <Content Include="app\css\accordion.css" />
+    <Content Include="app\css\images\2BoHN.png" />
     <Content Include="app\css\images\animated-overlay.gif" />
+    <Content Include="app\css\images\Leap_Gesture_Circle.png" />
     <Content Include="app\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="app\css\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="app\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
