@@ -73,6 +73,7 @@
     <Content Include="app\css\jquery.ui.tabs.css" />
     <Content Include="app\css\jquery.ui.theme.css" />
     <Content Include="app\css\jquery.ui.tooltip.css" />
+    <Content Include="app\css\reader-view.css" />
     <Content Include="app\HtmlPage1.html" />
     <Content Include="app\css\styles.css" />
     <Content Include="app\popup.html" />

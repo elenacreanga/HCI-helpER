@@ -1,0 +1,55 @@
+﻿body {
+	line-height: 1.75em !important;
+}
+
+p {
+	color: #282828 !important;
+	font-size: 16px !important;
+}
+
+h1,
+h2 {
+	color: #292929 !important;
+}
+h1 {
+	font-size: 30px !important;
+	line-height: 34px !important;
+}
+h2 {
+	font-size: 20px !important;
+	line-height: 25px !important;
+}
+
+h3 {
+	font-size: 16px !important;
+	color: #292929 !important;
+	line-height: 27px !important;
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	border-bottom: 1px solid #D8D8D8 !important;
+	border-top: 1px solid #D8D8D8 !important;
+}
+
+hr {
+	height: 1px !important;
+	background-color: #d8d8d8 !important;
+	border: none !important;
+	width: 100% !important;
+	margin: 0px !important;
+}
+
+a[href] {
+	color: #27AAE1 !important;
+}
+
+a[href]:hover {
+	color: #4ECAFF !important;
+}
+
+img {
+	max-width: 100% !important;
+}
+
+li {
+	line-height: 1.5em !important;
+}
