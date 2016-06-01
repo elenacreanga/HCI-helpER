@@ -94,6 +94,8 @@ var themes = [
     }
 ];
 
+var currentThemeId = 0;
+
 function changeTheme(e) {
     var filteredThemes = themes.filter(function (x) {
         return x.name === e.target.id;
@@ -110,68 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //Leap Motion
-var minions = {};
-
-//Leap.loop(function (frame) {
-
-//    frame.hands.forEach(function (hand, index) {
-
-//        var minion = (minions[index] || (minions[index] = new Minion()));
-//        minion.setTransform(hand.screenPosition(), hand.roll());
-//        minion.setVisibility("visible");
-//    });
-    
-
-//}).use('screenPosition', { scale: 0.25 });
-
-
-var Minion = function () {
-    var minion = this;
-    var img = document.createElement('img');
-    img.src = 'http://1.bp.blogspot.com/-5CO7x9vuYqM/UioQcaLoCYI/AAAAAAAACjg/osbeeGf6Tig/s1600/minion_icon_image_picfishblogspotcom+%252810%2529.png';
-    img.style.position = 'absolute';
-    img.onload = function () {
-        minion.setTransform([window.innerWidth / 2, window.innerHeight / 2], 0);
-        document.body.appendChild(img);
-    }
-
-    minion.setVisibility = function(visibiity) {
-        img.style.visibility = visibiity;
-    };
-
-    minion.setTransform = function (position, rotation) {
-
-        img.style.left = position[0] - img.width / 2 + 'px';
-        img.style.top = position[1] - img.height / 2 + 'px';
-
-        img.style.transform = 'rotate(' + -rotation + 'rad)';
-
-        img.style.webkitTransform = img.style.MozTransform = img.style.msTransform =
-        img.style.OTransform = img.style.transform;
-
-    };
-
-};
-
-minions[0] = new Minion();
-minions[0].setVisibility("hidden");
-
-// This allows us to move the minion even whilst in an iFrame.
-//Leap.loopController.setBackground(true);
-
-
-
 var controller = new Leap.Controller({ enableGestures: true });
-
-//controller.loop({
-//    hand: function (hand) {
-//        if (hand.pinchStrength > 0) {
-//            var pinchingFinger = findPinchingFingerType(hand);
-//            console.log("the finger is " + pinchingFinger.type + "<br />");
-//        }
-
-//    }
-//});
 
 function isDirectionClockwise(circle, frame) {
     var clockwise = false;
@@ -216,12 +157,17 @@ controller.addStep(function (frame) {
     return frame; // Return frame data unmodified
 });
 
-//controller.addStep(function(hand) {
-//    if (hand.pinchStrength > 0 ) {
-//        var pinchingFinger = findPinchingFingerType(hand);
-//        console.log("the finger is " + pinchingFinger.type + "<br />");
-//    }
-//});
+controller.on('swipe', function (swipe, frame) {
+    // Print its data when the state is start or stop
+    if (swipe.state == 'start' || swipe.state == 'stop') {
+        var dir = swipe.direction;
+        var dirStr = dir[0] > 0.8 ? 'right' : dir[0] < -0.8 ? 'left'
+                   : dir[1] > 0.8 ? 'up' : dir[1] < -0.8 ? 'down'
+                   : dir[2] > 0.8 ? 'backward' : 'forward';
+        console.log(swipe.state, swipe.type, swipe.id, dirStr,
+                    'direction:', dir);
+    }
+});
 
 // Circle gesture event listener
 controller.on('circle', function (circle, frame) {
